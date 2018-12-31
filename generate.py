@@ -2,6 +2,8 @@
 # coding:utf8
 import os
 import re
+import configparser
+
 
 def generate(directory):
     html_files = os.popen("find %s -iname '*.html'"%(directory))
@@ -14,11 +16,8 @@ def generate(directory):
 
             context = f.read()
             js = list(set(jspattern.findall(context)))
-            print js
             css = list(set(csspattern.findall(context)))
-            print css
             img = list(set([i[0] for i in imgpattern.findall(context)]))
-            print img
     result = js + css + img
     return result
 
@@ -31,9 +30,6 @@ def generate_main_config(files):
     with open('nginx_http2_push.config', 'w') as f:
         for line in string:
             f.write(line+'\n')
-
-
-
 
 
 
